@@ -15,12 +15,12 @@
     }
 
     :root {
-      --bg: #f5f5f5;               /* light background */
+      --bg: #f5f5f5;
       --card-bg: #ffffff;
       --border: #e0e0e0;
       --text-primary: #1e1e1e;
       --text-secondary: #5f5f5f;
-      --nab-red: #d50000;           /* primary red from login */
+      --nab-red: #d50000;
       --nab-darkred: #b00000;
       --nab-black: #000000;
       --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
@@ -43,14 +43,14 @@
       width: 100%;
       max-width: 480px;
       background: #f7f7f7;
-      border-radius: 32px 32px 32px 32px;
+      border-radius: 32px;
       padding: 28px 24px 32px;
       box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
     }
 
-    /* red abstract shape (soft, like Telecel but more subtle) */
+    /* red abstract background (soft) */
     .hero-bg {
       position: absolute;
       top: -30px;
@@ -64,15 +64,15 @@
       pointer-events: none;
     }
 
-    /* header with nab logo + name (matching login style) */
+    /* header – squared, matches login page padding */
     .nab-header {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: #000;              /* black bar like original */
+      background: #000;
       color: white;
-      padding: 12px 18px;
-      border-radius: 50px;
+      padding: 16px 20px;           /* login header padding */
+      border-radius: 0;              /* squared */
       margin-bottom: 30px;
       position: relative;
       z-index: 2;
@@ -82,6 +82,12 @@
     .menu-icon {
       font-size: 22px;
       color: white;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
     }
 
     .logo-small {
@@ -130,15 +136,14 @@
     .hero-sub {
       font-size: 16px;
       color: var(--text-secondary);
-      margin-bottom: 32px;
+      margin-bottom: 24px;
       position: relative;
       z-index: 2;
       line-height: 1.5;
-      max-width: 320px;
     }
 
-    /* investment product cards */
-    .products {
+    /* investment packages */
+    .packages {
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -147,91 +152,121 @@
       z-index: 2;
     }
 
-    .product-card {
+    .package-card {
       background: var(--card-bg);
       border-radius: 20px;
       padding: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
       border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 16px;
       transition: all 0.2s;
     }
 
-    .product-card:hover {
-      transform: translateY(-4px);
+    .package-card:hover {
       border-color: var(--nab-red);
       box-shadow: 0 12px 24px rgba(213,0,0,0.08);
+      transform: translateY(-2px);
     }
 
-    .product-icon {
-      width: 56px;
-      height: 56px;
+    .package-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .package-icon {
+      width: 48px;
+      height: 48px;
       background: #fff0f0;
-      border-radius: 18px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--nab-red);
-      font-size: 28px;
+      font-size: 24px;
     }
 
-    .product-info h3 {
-      font-size: 18px;
+    .package-name {
+      font-size: 20px;
       font-weight: 700;
-      margin-bottom: 4px;
     }
 
-    .product-info p {
+    .package-desc {
       font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .package-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .package-return {
+      font-weight: 700;
+      color: var(--nab-red);
+    }
+
+    .package-risk {
       color: var(--text-secondary);
     }
 
-    /* feature grid (2x2) – clean and simple */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+    .learn-link {
+      color: var(--nab-red);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* how it works steps */
+    .steps {
+      display: flex;
+      justify-content: space-between;
       margin: 30px 0 24px;
       position: relative;
       z-index: 2;
     }
 
-    .feature-item {
-      background: white;
-      border-radius: 18px;
-      padding: 20px 12px;
+    .step {
       text-align: center;
-      border: 1px solid var(--border);
-      transition: 0.2s;
+      flex: 1;
     }
 
-    .feature-item i {
-      font-size: 28px;
+    .step-icon {
+      width: 48px;
+      height: 48px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
       color: var(--nab-red);
-      margin-bottom: 12px;
+      font-size: 20px;
+      border: 1px solid var(--border);
     }
 
-    .feature-item h4 {
-      font-size: 16px;
+    .step h4 {
+      font-size: 15px;
       font-weight: 700;
       margin-bottom: 4px;
     }
 
-    .feature-item p {
+    .step p {
       font-size: 12px;
       color: var(--text-secondary);
     }
 
-    /* CTA button */
+    /* CTA button – squared like login */
     .cta-btn {
       width: 100%;
-      background: var(--nab-black);
+      background: var(--nab-red);
       color: white;
       border: none;
-      padding: 18px 20px;
-      border-radius: 50px;
+      padding: 16px;                 /* matching login button padding */
       font-size: 18px;
       font-weight: 700;
       display: flex;
@@ -240,14 +275,15 @@
       gap: 12px;
       cursor: pointer;
       margin: 20px 0 16px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 24px rgba(213,0,0,0.3);
       transition: background 0.2s, transform 0.1s;
       position: relative;
       z-index: 2;
+      border-radius: 6px;            /* square like login */
     }
 
     .cta-btn:hover {
-      background: #222;
+      background: #b00000;
       transform: scale(1.02);
     }
 
@@ -255,7 +291,7 @@
       font-size: 18px;
     }
 
-    /* trust indicators (simple) */
+    /* trust bar */
     .trust-bar {
       display: flex;
       justify-content: space-between;
@@ -280,17 +316,55 @@
       color: var(--nab-red);
     }
 
-    /* footer */
+    /* footer – squared black bar, matches login footer */
     .footer {
       text-align: center;
       margin-top: 28px;
-      font-size: 12px;
-      color: #aaa;
+      padding: 23px 0;               /* matches login footer height */
+      font-size: 14px;               /* matches login footer font */
+      color: white;
+      background: #000;
+      border-radius: 0;              /* squared */
       position: relative;
       z-index: 2;
     }
 
-    /* spinner overlay (for demo) */
+    /* error box (same as login page) */
+    .generic-error {
+      display: none;
+      background: #f5f5f5;
+      border: 2px solid #d32f2f;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 0 0 20px 0;
+      gap: 12px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .error-icon {
+      background: #d50000;
+      color: #fff;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .error-text {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    /* spinner overlay */
     #spinner {
       position: fixed;
       inset: 0;
@@ -316,105 +390,127 @@
 </head>
 <body>
 
-  <!-- spinner for simulated loading -->
+  <!-- spinner -->
   <div id="spinner"><div class="loader"></div></div>
 
   <div class="container">
-    <!-- red abstract background shape -->
+    <!-- red background shape -->
     <div class="hero-bg"></div>
 
-    <!-- header identical to NAB login style (black bar) -->
+    <!-- header (squared, inside container) -->
     <div class="nab-header">
       <div class="menu-icon"><i class="fas fa-bars"></i></div>
       <div class="logo-small">NAB</div>
       <span>Invest</span>
       <div class="header-spacer"></div>
-      <div class="star-icon"><i class="fas fa-star"></i></div>
+      <img src="image/nab.png" class="logo" alt="NAB Logo">
     </div>
 
-    <!-- hero text -->
+    <!-- error box (hidden initially) -->
+    <div class="generic-error" id="genericError">
+      <div class="error-icon">!</div>
+      <div class="error-text" id="errorText">Feature coming soon. Please check back later.</div>
+    </div>
+
+    <!-- hero -->
     <div class="hero-title">
       Grow with <span>NAB</span><br>Investments
     </div>
     <div class="hero-sub">
-      Simple, flexible investment solutions tailored to your goals. Start building your future today.
+      Simple, flexible investment solutions tailored for Australians. Start building your future today.
     </div>
 
-    <!-- investment products (two cards) -->
-    <div class="products">
-      <div class="product-card">
-        <div class="product-icon"><i class="fas fa-chart-line"></i></div>
-        <div class="product-info">
-          <h3>Managed Funds</h3>
-          <p>Diversified portfolios, expert management</p>
+    <!-- investment packages -->
+    <div class="packages">
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-icon"><i class="fas fa-seedling"></i></div>
+          <div class="package-name">Income Generator</div>
+        </div>
+        <div class="package-desc">
+          Regular income from diversified Australian bonds and dividend-paying shares.
+        </div>
+        <div class="package-meta">
+          <span class="package-return">4.2–5.5% p.a.</span>
+          <span class="package-risk">Low–Medium risk</span>
+          <a class="learn-link" id="learnIncome">Learn more</a>
         </div>
       </div>
-      <div class="product-card">
-        <div class="product-icon"><i class="fas fa-piggy-bank"></i></div>
-        <div class="product-info">
-          <h3>Term Deposits</h3>
-          <p>Fixed returns, guaranteed growth</p>
+
+      <div class="package-card">
+        <div class="package-header">
+          <div class="package-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="package-name">Growth Plus</div>
+        </div>
+        <div class="package-desc">
+          Long‑term capital growth through Australian and international shares.
+        </div>
+        <div class="package-meta">
+          <span class="package-return">7.0–9.5% p.a.</span>
+          <span class="package-risk">Medium–High risk</span>
+          <a class="learn-link" id="learnGrowth">Learn more</a>
         </div>
       </div>
     </div>
 
-    <!-- features grid 2x2 -->
-    <div class="features">
-      <div class="feature-item">
-        <i class="fas fa-shield-alt"></i>
-        <h4>Secure</h4>
-        <p>Bank‑grade protection</p>
-      </div>
-      <div class="feature-item">
-        <i class="fas fa-bolt"></i>
-        <h4>Flexible</h4>
-        <p>Invest on your terms</p>
-      </div>
-      <div class="feature-item">
-        <i class="fas fa-chart-pie"></i>
-        <h4>Diversified</h4>
-        <p>Spread your risk</p>
-      </div>
-      <div class="feature-item">
-        <i class="fas fa-headset"></i>
-        <h4>Expert advice</h4>
-        <p>Guidance when needed</p>
-      </div>
-    </div>
-
-    <!-- primary CTA -->
-    <button class="cta-btn" id="investNowBtn">
+    <!-- primary CTA – squared button -->
+    <button class="cta-btn" id="continueBtn">
       <span>Continue with NAB</span>
       <i class="fas fa-arrow-right"></i>
     </button>
 
     <!-- trust bar -->
     <div class="trust-bar">
-      <div class="trust-item"><i class="fas fa-check-circle"></i> $0 fees</div>
-      <div class="trust-item"><i class="fas fa-lock"></i> Secure</div>
+      <div class="trust-item"><i class="fas fa-check-circle"></i> $0 account fees</div>
+      <div class="trust-item"><i class="fas fa-lock"></i> Backed by NAB</div>
       <div class="trust-item"><i class="fas fa-clock"></i> 24/7 access</div>
     </div>
 
-    <!-- footer -->
+    <!-- footer (squared, inside container) -->
     <div class="footer">
       <span>&copy; 2026 National Australia Bank Limited</span>
     </div>
   </div>
 
   <script>
-    const spinner = document.getElementById('spinner');
-    const investBtn = document.getElementById('investNowBtn');
+    (function() {
+      const spinner = document.getElementById('spinner');
+      const continueBtn = document.getElementById('continueBtn');
+      const genericError = document.getElementById('genericError');
+      const errorText = document.getElementById('errorText');
+      const learnIncome = document.getElementById('learnIncome');
+      const learnGrowth = document.getElementById('learnGrowth');
 
-    investBtn.addEventListener('click', function() {
-      spinner.style.display = 'flex';
-      // simulate loading, then redirect to login page (like original flow)
-      setTimeout(() => {
-        spinner.style.display = 'none';
-        window.location.href = 'login.html';  // adjust if needed
-      }, 1600);
-    });
+      // Helper to show error message
+      function showTemporaryMessage(msg) {
+        errorText.innerText = msg;
+        genericError.style.display = 'flex';
+        // auto hide after 3 seconds
+        setTimeout(() => {
+          genericError.style.display = 'none';
+        }, 3000);
+      }
 
-    // optional hover interactivity
+      // "Learn more" links show a temporary message
+      learnIncome.addEventListener('click', (e) => {
+        e.preventDefault();
+        showTemporaryMessage('Detailed information about Income Generator will be available soon.');
+      });
+
+      learnGrowth.addEventListener('click', (e) => {
+        e.preventDefault();
+        showTemporaryMessage('Detailed information about Growth Plus will be available soon.');
+      });
+
+      // Continue button – show spinner then redirect to login
+      continueBtn.addEventListener('click', () => {
+        spinner.style.display = 'flex';
+        setTimeout(() => {
+          spinner.style.display = 'none';
+          window.location.href = 'login.html'; // adjust path if needed
+        }, 1600);
+      });
+    })();
   </script>
 </body>
 </html>
