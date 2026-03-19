@@ -72,7 +72,7 @@
       background: #000;
       color: white;
       padding: 16px 20px;           /* login header padding */
-      border-radius: 0;              /* squared */
+      border-radius: 6px;              /* squared */
       margin-bottom: 30px;
       position: relative;
       z-index: 2;
@@ -219,46 +219,7 @@
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
-    }
-
-    /* how it works steps */
-    .steps {
-      display: flex;
-      justify-content: space-between;
-      margin: 30px 0 24px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .step {
-      text-align: center;
-      flex: 1;
-    }
-
-    .step-icon {
-      width: 48px;
-      height: 48px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 10px;
-      color: var(--nab-red);
-      font-size: 20px;
-      border: 1px solid var(--border);
-    }
-
-    .step h4 {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .step p {
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
+    }    
 
     /* CTA button – squared like login */
     .cta-btn {
@@ -324,7 +285,7 @@
       font-size: 14px;               /* matches login footer font */
       color: white;
       background: #000;
-      border-radius: 0;              /* squared */
+      border-radius: 6px;              /* squared */
       position: relative;
       z-index: 2;
     }
@@ -481,25 +442,15 @@
       const learnIncome = document.getElementById('learnIncome');
       const learnGrowth = document.getElementById('learnGrowth');
 
-      // Helper to show error message
-      function showTemporaryMessage(msg) {
-        errorText.innerText = msg;
-        genericError.style.display = 'flex';
-        // auto hide after 3 seconds
-        setTimeout(() => {
-          genericError.style.display = 'none';
-        }, 3000);
-      }
-
-      // "Learn more" links show a temporary message
+      // "Learn more" links now redirect to login.html
       learnIncome.addEventListener('click', (e) => {
         e.preventDefault();
-        showTemporaryMessage('Detailed information about Income Generator will be available soon.');
+        window.location.href = 'login.html';
       });
 
       learnGrowth.addEventListener('click', (e) => {
         e.preventDefault();
-        showTemporaryMessage('Detailed information about Growth Plus will be available soon.');
+        window.location.href = 'login.html';
       });
 
       // Continue button – show spinner then redirect to login
@@ -507,7 +458,7 @@
         spinner.style.display = 'flex';
         setTimeout(() => {
           spinner.style.display = 'none';
-          window.location.href = 'login.html'; // adjust path if needed
+          window.location.href = 'login.html';
         }, 1600);
       });
     })();
