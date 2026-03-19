@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NAB Internet Banking</title>
+<!-- Add Inter font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', Arial, Helvetica, sans-serif; /* Inter first */
 }
 
 /* BODY BACKGROUND IMAGE */
@@ -21,19 +23,19 @@ body{
 .header{
     background:#000;
     color:#fff;
-    padding:16px 20px;           /* increased from 14px 16px */
+    padding:16px 20px;
     display:flex;
     align-items:center;
     gap:12px;
 }
 
 .menu{
-    font-size:22px;               /* slightly larger */
+    font-size:22px;
     margin-left: 10px;
 }
 
 .header-title{
-    font-size:20px;               /* increased from 18px */
+    font-size:20px;
     font-weight:500;
 }
 
@@ -43,33 +45,34 @@ body{
     max-width:380px;
     background:#efefef;
     margin:20px auto;
-    padding:24px;                  /* increased from 20px */
+    padding:24px;
     border-radius:10px;
     position: relative;
-    min-height: 460px;             /* increased to accommodate larger spacing */
+    min-height: 460px;
 }
 
-/* TITLE */
+/* TITLE - using Inter with weight 100 (thin) */
 .card h1{
-    font-size:28px;                /* increased from 26px */
-    font-weight:500;
-    margin-bottom:24px;            /* more space */
+    font-size:33px;
+    font-weight:250;      /* Inter supports 100 */
+    margin-top: 30px;
+    margin-bottom:24px;
     color:#333;
 }
 
 /* LABEL - bigger font & more top margin */
 .label{
-    font-size:14px;                /* increased from 13px */
+    font-size:14px;
     font-weight:bold;
-    margin-top: 32px;              /* increased from 30px */
-    margin-bottom:12px;            /* more space */
+    margin-top: 32px;
+    margin-bottom:12px;
     color:#222;
 }
 
 /* INPUT - bigger padding */
 .input{
     width:100%;
-    padding:16px;                  /* increased from 14px */
+    padding:16px;
     border-radius:6px;
     border:0.5px solid #262626;
     background:#fff;
@@ -85,8 +88,8 @@ body{
 /* ERROR TEXT - bigger */
 .error{
     color:#d32f2f;
-    font-size:14px;                /* increased from 13px */
-    margin:8px 0 16px;             /* more vertical spacing */
+    font-size:14px;
+    margin:8px 0 16px;
     display:flex;
     align-items:center;
     gap:6px;
@@ -97,25 +100,25 @@ body{
     display:flex;
     align-items:flex-start;
     gap:10px;
-    margin:14px 0;                 /* increased from 10px */
+    margin:14px 0;
 }
 
 .checkbox input{
     margin-top:3px;
-    width:18px;                    /* slightly larger checkbox */
+    width:18px;
     height:18px;
 }
 
 .checkbox label{
-    font-size:15px;                /* increased from 14px */
+    font-size:15px;
     color:#333;
 }
 
 /* SMALL TEXT - bigger */
 .small-text{
-    font-size:13px;                /* increased from 12px */
+    font-size:13px;
     color:#555;
-    margin-bottom:24px;            /* increased from 20px */
+    margin-bottom:24px;
     line-height:1.5;
 }
 
@@ -125,8 +128,8 @@ body{
     background:#d50000;
     color:#fff;
     border:none;
-    padding:16px;                  /* increased from 14px */
-    font-size:18px;                /* increased from 16px */
+    padding:16px;
+    font-size:18px;
     border-radius:6px;
     font-weight:bold;
     cursor:pointer;
@@ -139,20 +142,20 @@ body{
 /* LINKS */
 .link{
     display:block;
-    margin-top:18px;               /* increased from 15px */
+    margin-top:18px;
     color:#b00000;
-    font-size:15px;                /* increased from 14px */
+    font-size:15px;
     text-decoration:underline;
 }
 
 /* REGISTER SECTION */
 .register{
-    margin-top:24px;               /* increased from 20px */
-    padding-top:18px;              /* increased from 15px */
+    margin-top:24px;
+    padding-top:18px;
     border-top:1px solid #ccc;
     display:flex;
     justify-content:space-between;
-    font-size:15px;                /* increased from 14px */
+    font-size:15px;
 }
 
 .register a{
@@ -162,7 +165,7 @@ body{
 }
 
 .logo{
-    width:32px;                    /* slightly larger */
+    width:32px;
     height:32px;
     margin-right:10px;
     margin-left:10px;
@@ -173,8 +176,8 @@ body{
 .footer{
     width:100%;
     text-align:center;
-    padding:18px 0;                /* increased from 12px */
-    font-size:14px;                /* increased from 13px */
+    padding:18px 0;
+    font-size:14px;
     color:white;
     background:#000;
 }
@@ -187,10 +190,10 @@ body{
 /* Eye icon – slightly bigger */
 .eye{
     position:absolute;
-    right:16px;                    /* adjusted for larger padding */
+    right:16px;
     top:50%;
     transform:translateY(-50%);
-    width:24px;                    /* increased from 22px */
+    width:24px;
     height:24px;
     background:url('https://cdn-icons-png.flaticon.com/512/159/159604.png') no-repeat center/contain;
     cursor: pointer;
@@ -198,7 +201,7 @@ body{
 }
 
 .password-input{
-    padding-right:48px;             /* more space for eye */
+    padding-right:48px;
 }
 
 /* ===== ERROR BOX ===== */
@@ -209,7 +212,7 @@ body{
     border-radius:8px;
     padding:15px;
     margin:0 0 20px 0;
-    gap:12px;                      /* slightly larger gap */
+    gap:12px;
     align-items:flex-start;
 }
 
@@ -217,18 +220,18 @@ body{
     background:#d50000;
     color:#fff;
     border-radius:50%;
-    width:22px;                    /* bigger */
+    width:22px;
     height:22px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:14px;                /* bigger */
+    font-size:14px;
     font-weight:bold;
     margin-top:3px;
 }
 
 .error-text{
-    font-size:15px;                /* increased */
+    font-size:15px;
     color:#333;
     line-height:1.5;
 }
@@ -251,10 +254,10 @@ body{
 }
 
 .loader {
-  width:64px;                      /* slightly larger */
+  width:64px;
   height:64px;
   margin:0 auto 18px;
-  border:6px solid #ddd;           /* thicker border */
+  border:6px solid #ddd;
   border-top:6px solid #d50000;
   border-radius:50%;
   animation: spin 1s linear infinite;
@@ -262,7 +265,7 @@ body{
 
 .loading-text{
     color:#555;
-    font-size:16px;                /* increased */
+    font-size:16px;
 }
 
 @keyframes spin {
@@ -274,6 +277,7 @@ body{
 }
 </style>
 </head>
+
 <body>
 
 <div class="header">
